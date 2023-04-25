@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometria dos retângulos</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --vermelho: #A66571;
+            --azul-escuro: #414059;
+            --preto: #2E2E40;
+            --azul-claro: #85D3F2;
+            --branco: #E6E6E6;
+        }
+
+        body {
+            background-color: var(--azul-escuro);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+        }
+
+        .maior {
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+
+        .d-l {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        img {
+            width: 100%;
+            height: 400px;
+        }
+
+        .d-r {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h1 {
+            color: var(--vermelho);
+        }
+
+        .d-inputs {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input {
+            border: none;
+            background-color: transparent;
+            border-radius: 20px;
+            border: solid 2px var(--preto);
+            padding: 10px;
+            color: var(--azul-claro);
+            text-align: center;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+
+        .btn-res {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60%;
+        }
+
+        .btn-calcular {
+            font-size: 1rem;
+            border-radius: 20px;
+            width: 80%;
+            height: 40px;
+            border: none;
+            padding: 10px;
+            background-color: var(--azul-claro);
+            color: var(--preto);
+            font-weight: bold;
+            box-shadow: -5px 8px 5px var(--preto);
+        }
+
+        .btn-calcular:active {
+            box-shadow: inset -2px 1px 1px var(--preto);
+            font-size: .9rem;
+
+        }
+
+        .res {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            color: var(--branco);
+        }
+
+        @media screen and (max-width: 700px) {
+            .maior {
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .d-r {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            img {
+                width: 150%;
+            }
+
+            .d-inputs {
+                width: 90%;
+            }
+
+            h1 {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="maior">
+        <div class="d-l">
+            <img src="./img/undraw_calculator_re_alsc.svg" alt="imagem principal">
+        </div>
+        <div class="d-r">
+            <h1>Geometria retângular</h1>
+            <div class="d-inputs">
+                <input type="number" id="altura" placeholder="Digite a altura do retângulo">
+                <input type="number" id="largura" placeholder="Digite a largura do retângulo">
+            </div>
+            <div class="btn-res">
+                <button class="btn-calcular" type="button">Calcular</button>
+                <script>
+
+                    var inputAlt = document.querySelector("#altura").focus();
+                    function perimetro() {
+                        var inputAlt = parseFloat(document.querySelector("#altura").value);
+                        var inputLarg = parseFloat(document.querySelector("#largura").value);
+                        var perímetro = document.querySelector(".perímetro")
+
+                        var p = 2 * inputLarg + 2 * inputAlt;
+
+                        perímetro.innerHTML = "Perímetro: " + p.toFixed(2);
+
+                    }
+
+                    function area() {
+                        var inputAlt = parseFloat(document.querySelector("#altura").value);
+                        var inputLarg = parseFloat(document.querySelector("#largura").value);
+                        var área = document.querySelector(".área")
+
+                        var a = inputLarg * inputAlt;
+
+                        área.innerHTML = "Área: " + a.toFixed(2);
+                    }
+
+                    function diagonal() {
+                        var inputAlt = parseFloat(document.querySelector("#altura").value);
+                        var inputLarg = parseFloat(document.querySelector("#largura").value);
+                        var diagonal = document.querySelector(".diagonal")
+
+                        var dae = Math.pow(inputAlt, 2);
+                        var dle = Math.pow(inputLarg, 2);
+                        var de = dae + dle;
+                        var dr = Math.sqrt(de);
+                        var d = dr;
+                        diagonal.innerHTML = "Diagonal: " + d.toFixed(2);
+                    }
+
+                    function rest() {
+                        perimetro();
+                        area();
+                        diagonal();
+
+                        var inputAlt = document.querySelector("#altura");
+                        var inputLarg = document.querySelector("#largura");
+                        inputAlt.focus();
+                        inputAlt.value = "";
+                        inputLarg.value = "";
+                    }
+
+                    const btn = document.querySelector(".btn-calcular");
+                    btn.addEventListener('click', () => {
+
+                        rest();
+
+                    });
+                </script>
+            </div>
+            <div class="res">
+                <p class="perímetro"></p>
+                <p class="área"></p>
+                <p class="diagonal"></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
